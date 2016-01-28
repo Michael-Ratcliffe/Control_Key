@@ -1,0 +1,11 @@
+General Fixes:
+Sometimes config files will not load due to line endings.
+This only happens when a config is made on a different platform than the one loading it.
+Also I think this only happens if the config was edited manually?
+
+Platform:
+Add a way to check if there are unmapped inputs. Example) warn if "w" if not defined for the platform
+
+Controler:
+
+GUI:

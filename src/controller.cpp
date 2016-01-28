@@ -121,7 +121,7 @@ void Controller::Update(Platform *platform)
 
     for(auto &i : _currentState)
     {
-        std::string str = GetMapping(i.first);
+        std::string str = GetPlatformMapping(i.first);
         platform->SimulateEvent(str, i.second);
     }
 
@@ -278,7 +278,7 @@ void Controller::_PollButtonState()
     }
 }
 
-std::string Controller::GetMapping(std::string name)const
+std::string Controller::GetPlatformMapping(std::string name)const
 {
     auto i = _mappings.find(name);
     if(i != _mappings.end())
@@ -288,7 +288,7 @@ std::string Controller::GetMapping(std::string name)const
     return "none";
 }
 
-std::map<std::string, std::string> Controller::GetInputMappings()const
+std::map<std::string, std::string> Controller::GetAllMappings()const
 {
     return _mappings;
 }

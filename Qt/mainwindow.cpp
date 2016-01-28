@@ -235,7 +235,7 @@ void MainWindow::on_comboBox_configfiles_currentIndexChanged(const QString &arg1
     controlKey.LoadConfig(GetFilePath().toStdString());
 
     //update the combo boxes to match our opened config
-    for(auto &i: controlKey.controller.GetInputMappings())
+    for(auto &i: controlKey.controller.GetAllMappings())
     {
         if(comboBoxMappings.find(i.first) != comboBoxMappings.end())
             comboBoxMappings[i.first]->setCurrentText(QString::fromStdString(i.second));

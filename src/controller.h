@@ -37,8 +37,8 @@ public:
     float GetAxis(SDL_GameControllerAxis axis)const;
     Vector2f GetAnalogAxis(Analog analog)const;
     float GetTriggerAxis(Trigger trigger)const;
-    std::string GetMapping(std::string name)const;
-    std::map<std::string, std::string> GetInputMappings()const;
+    std::string GetPlatformMapping(std::string name)const;
+    std::map<std::string, std::string> GetAllMappings()const;
     bool Quit();
 
     Analog mouseLookAnalog;

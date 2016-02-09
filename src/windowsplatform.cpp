@@ -68,7 +68,7 @@ std::string WindowsPlatform::GetOSName()const
     return "Windows";
 }
 
-void WindowsPlatform::SimulateKey(int keycode, bool pressed)
+void WindowsPlatform::_FakeKeyPress(int keycode, bool pressed)
 {
     INPUT ip;
     ip.type = INPUT_KEYBOARD;
@@ -87,7 +87,7 @@ void WindowsPlatform::SimulateKey(int keycode, bool pressed)
     SendInput(1, &ip, sizeof(INPUT));
 }
 
-void WindowsPlatform::SimulateMouseMove(int x, int y)
+void WindowsPlatform::_FakeMouseMove(int x, int y)
 {
     INPUT ip;
     ip.type = INPUT_MOUSE;
@@ -101,7 +101,7 @@ void WindowsPlatform::SimulateMouseMove(int x, int y)
     SendInput(1, &ip, sizeof(INPUT));
 }
 
-void WindowsPlatform::SimulateMouseButton(int button, bool pressed)
+void WindowsPlatform::_FakeMouseButton(int button, bool pressed)
 {
     INPUT ip;
     ip.type = INPUT_MOUSE;
@@ -119,7 +119,7 @@ void WindowsPlatform::SimulateMouseButton(int button, bool pressed)
     SendInput(1, &ip, sizeof(INPUT));
 }
 
-void WindowsPlatform::SimulateMouseWheel(int wheel, bool pressed)
+void WindowsPlatform::_FakeMouseWheel(int wheel, bool pressed)
 {
     INPUT ip;
     ip.type = INPUT_MOUSE;

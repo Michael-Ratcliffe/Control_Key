@@ -60,7 +60,7 @@ private:
     std::map<std::string, std::string> _mappings;
     //_curentState is a map of all axes and buttons with a float value
     //representing their current state.
-    std::map<std::string, float> _currentState;
+    std::map<std::string, bool> _currentState;
 };
 
 #endif

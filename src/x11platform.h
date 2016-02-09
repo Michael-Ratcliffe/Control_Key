@@ -11,12 +11,13 @@ public:
 	virtual ~X11Platform();
 
     virtual std::string GetOSName()const override;
-	virtual void SimulateKey(int keycode, bool pressed)override;
-	virtual void SimulateMouseMove(int x, int y)override;
-	virtual void SimulateMouseButton(int button, bool pressed)override;
-	virtual void SimulateMouseWheel(int wheel, bool pressed)override;
 
 private:
+	virtual void _FakeKeyPress(int keycode, bool pressed)override;
+	virtual void _FakeMouseMove(int x, int y)override;
+	virtual void _FakeMouseButton(int button, bool pressed)override;
+	virtual void _FakeMouseWheel(int wheel, bool pressed)override;
+
 	Display *_display;
 	void _Flush();
 };

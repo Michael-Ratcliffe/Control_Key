@@ -122,10 +122,10 @@ void Controller::Update(Platform *platform)
     for(auto &i : _currentState)
     {
         std::string str = GetPlatformMapping(i.first);
-        platform->SimulateEvent(str, i.second);
+        platform->SimulateButton(str, i.second);
     }
 
-    platform->UpdateMouseMovement(GetAnalogAxis(mouseLookAnalog));
+    platform->SimulateMouse(GetAnalogAxis(mouseLookAnalog));
 }
 
 float Controller::GetAxis(SDL_GameControllerAxis axis)const

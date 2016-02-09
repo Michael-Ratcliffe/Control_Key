@@ -1,6 +1,8 @@
 #ifndef VECTOR2F_H
 #define VECTOR2F_H
 
+//Over engineered for this project, however it was pulled from another one.
+
 class Vector2f
 {
 public:

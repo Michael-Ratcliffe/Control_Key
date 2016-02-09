@@ -21,7 +21,7 @@ void Platform::SetConfig(ConfigParser *config)
     config->FillValue(doubleScroll, "doublescroll", "[Config]");
 }
 
-void Platform::UpdateMouseMovement(Vector2f pos)
+void Platform::SimulateMouse(Vector2f pos)
 {
     float current = SDL_GetTicks();
     float deltaTime = current - _previousTime;
@@ -29,62 +29,57 @@ void Platform::UpdateMouseMovement(Vector2f pos)
     float x = (mouseSensitivity * pos.x) * deltaTime;
     float y = (mouseSensitivity * pos.y) * deltaTime;
 
-    SimulateMouseMove(x, y);
+    _FakeMouseMove(x, y);
     _previousTime = current;
 }
 
-void Platform::SimulateEvent(std::string inputString, float val)
+void Platform::SimulateButton(std::string inputString, bool simulate)
 {
     //inputString is the mapped key/mouse button to a controller input
-    //val is ether 0 or 1 for a button. Or the axis value if its an axis
     Input input = _GetInputFromStr(inputString);
 
     //If the input state is the same as the last time.
     //Without this the user cannot use mapped keys/buttons while the application runs.
     //Also corrects input issues on windows.
-    if(_previousState[inputString] == (bool)val)
+    if(_previousState[inputString] == simulate)
         return;
 
 ///*debug
     if(inputString != "none")
-        std::cout << inputString << " " << val << std::endl;
+    {
+        if(simulate)
+            std::cout << inputString << ": active" << std::endl;
+        else
+            std::cout << inputString << ": inactive" << std::endl;
+    }
 //*/
     switch(input.type)
     {
         case INPUT_KEYBOARDBUTTON:
-            if(val == 0)
-                SimulateKey(input.code, false);
-            else
-                SimulateKey(input.code, true);
+            _FakeKeyPress(input.code, simulate);
         break;
 
         case INPUT_MOUSEBUTTON:
-            if(val == 0)
-                SimulateMouseButton(input.code, false);
-            else
-                SimulateMouseButton(input.code, true);
+            _FakeMouseButton(input.code, simulate);
         break;
 
         case INPUT_MOUSEWHEEL:
-            if(val == 0)
-                SimulateMouseWheel(input.code, false);
-            else
-                SimulateMouseWheel(input.code, true);
+            _FakeMouseWheel(input.code, simulate);
         break;
 
         case INPUT_UNKNOWN:
-
+            //nothing
         break;
     }
 
-    _previousState[inputString] = val;
+    _previousState[inputString] = simulate;
 }
 
 void Platform::ClearEvents()
 {
     for(auto &i : _inputMap)
     {
-        SimulateEvent(i.first, 0);
+        SimulateButton(i.first, 0);
     }
 
     _previousState.clear();

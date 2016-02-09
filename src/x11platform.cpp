@@ -74,26 +74,26 @@ std::string X11Platform::GetOSName()const
     return "Linux";
 }
 
-void X11Platform::SimulateKey(int keycode, bool pressed)
+void X11Platform::_FakeKeyPress(int keycode, bool pressed)
 {
 	keycode = (int)XKeysymToKeycode(_display, keycode);
 	XTestFakeKeyEvent(_display, keycode, pressed, 0);
 	_Flush();
 }
 
-void X11Platform::SimulateMouseMove(int x, int y)
+void X11Platform::_FakeMouseMove(int x, int y)
 {
 	XTestFakeRelativeMotionEvent(_display, x, y, 0);
 	_Flush();
 }
 
-void X11Platform::SimulateMouseButton(int button, bool pressed)
+void X11Platform::_FakeMouseButton(int button, bool pressed)
 {
 	XTestFakeButtonEvent(_display, button, pressed, 0);
 	_Flush();
 }
 
-void X11Platform::SimulateMouseWheel(int wheel, bool pressed)
+void X11Platform::_FakeMouseWheel(int wheel, bool pressed)
 {
     if(pressed && doubleScroll)
 	{

@@ -11,6 +11,7 @@ public:
     ConfigParser();
     ConfigParser(std::string filePath);
     ~ConfigParser();
+    
     void Open(std::string filePath);
     void Close();
     std::string GetSection(std::string sectionName);

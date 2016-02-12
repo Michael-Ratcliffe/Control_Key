@@ -29,13 +29,13 @@ void Platform::SimulateMouse(Vector2f pos)
     float x = (mouseSensitivity * pos.x) * deltaTime;
     float y = (mouseSensitivity * pos.y) * deltaTime;
 
-    _FakeMouseMove(x, y);
+    _OSFakeMouseMove(x, y);
     _previousTime = current;
 }
 
 void Platform::SimulateButton(std::string inputString, bool simulate)
 {
-    //inputString is the mapped key/mouse button to a controller input
+    //inputString is the mapped key/mouse button to a controller button/axis
     Input input = _GetInputFromStr(inputString);
 
     //If the input state is the same as the last time.
@@ -44,33 +44,30 @@ void Platform::SimulateButton(std::string inputString, bool simulate)
     if(_previousState[inputString] == simulate)
         return;
 
-///*debug
-    if(inputString != "none")
-    {
-        if(simulate)
-            std::cout << inputString << ": active" << std::endl;
-        else
-            std::cout << inputString << ": inactive" << std::endl;
-    }
-//*/
     switch(input.type)
     {
         case INPUT_KEYBOARDBUTTON:
-            _FakeKeyPress(input.code, simulate);
+            _OSFakeKeyPress(input.code, simulate);
         break;
 
         case INPUT_MOUSEBUTTON:
-            _FakeMouseButton(input.code, simulate);
+            _OSFakeMouseButton(input.code, simulate);
         break;
 
         case INPUT_MOUSEWHEEL:
-            _FakeMouseWheel(input.code, simulate);
+            _OSFakeMouseWheel(input.code, simulate);
         break;
 
         case INPUT_UNKNOWN:
-            //nothing
+            return;
         break;
     }
+///*debug
+    if(simulate)
+        std::cout << inputString << ": active" << std::endl;
+    else
+        std::cout << inputString << ": inactive" << std::endl;
+//*/
 
     _previousState[inputString] = simulate;
 }
@@ -79,7 +76,7 @@ void Platform::ClearEvents()
 {
     for(auto &i : _inputMap)
     {
-        SimulateButton(i.first, 0);
+        SimulateButton(i.first, false);
     }
 
     _previousState.clear();

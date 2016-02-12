@@ -1,6 +1,8 @@
 #ifdef __MACH__
 #include "macplatform.h"
 
+//All code here is preliminary and does NOT work yet.
+
 MacPlatform::MacPlatform()
 {
     //TODO: Fill in proper scancodes
@@ -70,18 +72,18 @@ std::string MacPlatform::GetOSName()const
     return "Mac";
 }
 
-void SimulateKey(int keycode, bool pressed)
+void MacPlatform::_OSFakeKeyPress(int keycode, bool pressed)
 {
     CGEventRef event = CGEventCreateKeyboardEvent (NULL, keycode, pressed);
     CFRelease(event);
 }
 
-void SimulateMouseMove(int x, int y)
+void MacPlatform::_OSFakeMouseMove(int x, int y)
 {
 
 }
 
-void SimulateMouseButton(int button, bool pressed)
+void MacPlatform::_OSFakeMouseButton(int button, bool pressed)
 {
     CGEventRef event
 
@@ -94,7 +96,7 @@ void SimulateMouseButton(int button, bool pressed)
     CFRelease(event);
 }
 
-void SimulateMouseWheel(int wheel, bool pressed)
+void MacPlatform::_OSFakeMouseWheel(int direction, bool pressed)
 {
 
 }

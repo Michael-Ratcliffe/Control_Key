@@ -58,7 +58,7 @@ private:
 
     SDL_GameController *_SDLController;
     std::map<std::string, std::string> _mappings;
-    //_curentState is a map of all axes and buttons with a float value
+    //_curentState is a map of all axes and buttons with a bool value
     //representing their current state.
     std::map<std::string, bool> _currentState;
 };

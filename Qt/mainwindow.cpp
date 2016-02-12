@@ -22,12 +22,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QStringList list;
     QStringListModel *itemModel = new QStringListModel(this);
 
+    list.push_back(QString::fromStdString("none"));
     for(auto &i: controlKey.platform.GetInputList())
     {
         list.append(QString::fromStdString(i));
     }
 
-    list.push_front(QString::fromStdString("none"));
     itemModel->setStringList(list);
 
 //Map key must match the SDL2 string names for buttons and axes

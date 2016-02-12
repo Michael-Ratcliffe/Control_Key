@@ -74,40 +74,40 @@ std::string X11Platform::GetOSName()const
     return "Linux";
 }
 
-void X11Platform::_FakeKeyPress(int keycode, bool pressed)
+void X11Platform::_OSFakeKeyPress(int keycode, bool pressed)
 {
 	keycode = (int)XKeysymToKeycode(_display, keycode);
 	XTestFakeKeyEvent(_display, keycode, pressed, 0);
 	_Flush();
 }
 
-void X11Platform::_FakeMouseMove(int x, int y)
+void X11Platform::_OSFakeMouseMove(int x, int y)
 {
 	XTestFakeRelativeMotionEvent(_display, x, y, 0);
 	_Flush();
 }
 
-void X11Platform::_FakeMouseButton(int button, bool pressed)
+void X11Platform::_OSFakeMouseButton(int button, bool pressed)
 {
 	XTestFakeButtonEvent(_display, button, pressed, 0);
 	_Flush();
 }
 
-void X11Platform::_FakeMouseWheel(int wheel, bool pressed)
+void X11Platform::_OSFakeMouseWheel(int direction, bool pressed)
 {
     if(pressed && doubleScroll)
 	{
         //The code below will simulate a few scroll clicks
 		//This is required for some games
-		XTestFakeButtonEvent(_display, wheel, true, 0);
+		XTestFakeButtonEvent(_display, direction, true, 0);
 		_Flush();
-		XTestFakeButtonEvent(_display, wheel, false, 0);
+		XTestFakeButtonEvent(_display, direction, false, 0);
 		_Flush();
-		XTestFakeButtonEvent(_display, wheel, true, 0);
+		XTestFakeButtonEvent(_display, direction, true, 0);
 	}
 
 	else
-		XTestFakeButtonEvent(_display, wheel, pressed, 0);
+		XTestFakeButtonEvent(_display, direction, pressed, 0);
 
 	_Flush();
 }

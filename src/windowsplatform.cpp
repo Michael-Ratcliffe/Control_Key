@@ -68,7 +68,7 @@ std::string WindowsPlatform::GetOSName()const
     return "Windows";
 }
 
-void WindowsPlatform::_FakeKeyPress(int keycode, bool pressed)
+void WindowsPlatform::_OSFakeKeyPress(int keycode, bool pressed)
 {
     INPUT ip;
     ip.type = INPUT_KEYBOARD;
@@ -87,7 +87,7 @@ void WindowsPlatform::_FakeKeyPress(int keycode, bool pressed)
     SendInput(1, &ip, sizeof(INPUT));
 }
 
-void WindowsPlatform::_FakeMouseMove(int x, int y)
+void WindowsPlatform::_OSFakeMouseMove(int x, int y)
 {
     INPUT ip;
     ip.type = INPUT_MOUSE;
@@ -101,7 +101,7 @@ void WindowsPlatform::_FakeMouseMove(int x, int y)
     SendInput(1, &ip, sizeof(INPUT));
 }
 
-void WindowsPlatform::_FakeMouseButton(int button, bool pressed)
+void WindowsPlatform::_OSFakeMouseButton(int button, bool pressed)
 {
     INPUT ip;
     ip.type = INPUT_MOUSE;
@@ -119,7 +119,7 @@ void WindowsPlatform::_FakeMouseButton(int button, bool pressed)
     SendInput(1, &ip, sizeof(INPUT));
 }
 
-void WindowsPlatform::_FakeMouseWheel(int wheel, bool pressed)
+void WindowsPlatform::_OSFakeMouseWheel(int direction, bool pressed)
 {
     INPUT ip;
     ip.type = INPUT_MOUSE;
@@ -130,9 +130,9 @@ void WindowsPlatform::_FakeMouseWheel(int wheel, bool pressed)
     ip.mi.dwFlags = MOUSEEVENTF_WHEEL;
 
     if(doubleScroll)
-        ip.mi.mouseData = 2*((WHEEL_DELTA*wheel)*(int)pressed);
+        ip.mi.mouseData = 2*((WHEEL_DELTA*direction)*(int)pressed);
     else
-        ip.mi.mouseData = (WHEEL_DELTA*wheel)*(int)pressed;
+        ip.mi.mouseData = (WHEEL_DELTA*direction)*(int)pressed;
 
     SendInput(1, &ip, sizeof(INPUT));
 }
@@ -143,66 +143,3 @@ WindowsPlatform::~WindowsPlatform()
 }
 
 #endif
-/*
-Old key syms
-This application uses scancodes now.
-	_AddInput("a", Input(65, INPUT_KEYBOARDBUTTON));
-    _AddInput("b", Input(66, INPUT_KEYBOARDBUTTON));
-    _AddInput("c", Input(67, INPUT_KEYBOARDBUTTON));
-    _AddInput("d", Input(68, INPUT_KEYBOARDBUTTON));
-    _AddInput("e", Input(69, INPUT_KEYBOARDBUTTON));
-    _AddInput("f", Input(70, INPUT_KEYBOARDBUTTON));
-    _AddInput("g", Input(71, INPUT_KEYBOARDBUTTON));
-    _AddInput("h", Input(72, INPUT_KEYBOARDBUTTON));
-    _AddInput("i", Input(73, INPUT_KEYBOARDBUTTON));
-    _AddInput("j", Input(74, INPUT_KEYBOARDBUTTON));
-    _AddInput("k", Input(75, INPUT_KEYBOARDBUTTON));
-    _AddInput("l", Input(76, INPUT_KEYBOARDBUTTON));
-    _AddInput("m", Input(77, INPUT_KEYBOARDBUTTON));
-    _AddInput("n", Input(78, INPUT_KEYBOARDBUTTON));
-    _AddInput("o", Input(79, INPUT_KEYBOARDBUTTON));
-    _AddInput("p", Input(80, INPUT_KEYBOARDBUTTON));
-    _AddInput("q", Input(81, INPUT_KEYBOARDBUTTON));
-    _AddInput("r", Input(82, INPUT_KEYBOARDBUTTON));
-    _AddInput("s", Input(83, INPUT_KEYBOARDBUTTON));
-    _AddInput("t", Input(84, INPUT_KEYBOARDBUTTON));
-    _AddInput("u", Input(85, INPUT_KEYBOARDBUTTON));
-    _AddInput("v", Input(86, INPUT_KEYBOARDBUTTON));
-    _AddInput("w", Input(87, INPUT_KEYBOARDBUTTON));
-    _AddInput("x", Input(89, INPUT_KEYBOARDBUTTON));
-    _AddInput("y", Input(90, INPUT_KEYBOARDBUTTON));
-    _AddInput("z", Input(91, INPUT_KEYBOARDBUTTON));
-
-    _AddInput("f1", Input(112, INPUT_KEYBOARDBUTTON));
-    _AddInput("f2", Input(113, INPUT_KEYBOARDBUTTON));
-    _AddInput("f3", Input(114, INPUT_KEYBOARDBUTTON));
-    _AddInput("f4", Input(115, INPUT_KEYBOARDBUTTON));
-    _AddInput("f5", Input(116, INPUT_KEYBOARDBUTTON));
-    _AddInput("f6", Input(117, INPUT_KEYBOARDBUTTON));
-    _AddInput("f7", Input(118, INPUT_KEYBOARDBUTTON));
-    _AddInput("f8", Input(119, INPUT_KEYBOARDBUTTON));
-    _AddInput("f9", Input(120, INPUT_KEYBOARDBUTTON));
-    _AddInput("f10", Input(121, INPUT_KEYBOARDBUTTON));
-    _AddInput("f11", Input(122, INPUT_KEYBOARDBUTTON));
-    _AddInput("f12", Input(123, INPUT_KEYBOARDBUTTON));
-
-    _AddInput("escape", Input(27, INPUT_KEYBOARDBUTTON));
-    _AddInput("tab", Input(9, INPUT_KEYBOARDBUTTON));
-    _AddInput("shift", Input(16, INPUT_KEYBOARDBUTTON));
-    _AddInput("enter", Input(13, INPUT_KEYBOARDBUTTON));
-    _AddInput("space", Input(32, INPUT_KEYBOARDBUTTON));
-    _AddInput("backspace", Input(8, INPUT_KEYBOARDBUTTON));
-    _AddInput("control", Input(162, INPUT_KEYBOARDBUTTON));
-    _AddInput("alt", Input(18, INPUT_KEYBOARDBUTTON));
-    //Mouse
-    _AddInput("mousex", Input(-1, INPUT_MOUSEMOTION));
-    _AddInput("mousey", Input(-2, INPUT_MOUSEMOTION));
-
-    _AddInput("leftclick", Input(MOUSEEVENTF_LEFTDOWN, INPUT_MOUSEBUTTON));
-    _AddInput("middleclick", Input(MOUSEEVENTF_MIDDLEDOWN, INPUT_MOUSEBUTTON));
-    _AddInput("rightclick", Input(MOUSEEVENTF_RIGHTDOWN, INPUT_MOUSEBUTTON));
-    //_AddInput("x1", Input(-3, INPUT_MOUSEBUTTON));
-    //_AddInput("x2", Input(-4, INPUT_MOUSEBUTTON));
-    _AddInput("scrollup", Input(1, INPUT_MOUSEWHEEL));
-    _AddInput("scrolldown", Input(-1, INPUT_MOUSEWHEEL));
-*/

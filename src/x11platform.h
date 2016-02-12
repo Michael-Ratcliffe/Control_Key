@@ -13,10 +13,10 @@ public:
     virtual std::string GetOSName()const override;
 
 private:
-	virtual void _FakeKeyPress(int keycode, bool pressed)override;
-	virtual void _FakeMouseMove(int x, int y)override;
-	virtual void _FakeMouseButton(int button, bool pressed)override;
-	virtual void _FakeMouseWheel(int wheel, bool pressed)override;
+	virtual void _OSFakeKeyPress(int keycode, bool pressed)override;
+	virtual void _OSFakeMouseMove(int x, int y)override;
+	virtual void _OSFakeMouseButton(int button, bool pressed)override;
+	virtual void _OSFakeMouseWheel(int direction, bool pressed)override;
 
 	Display *_display;
 	void _Flush();

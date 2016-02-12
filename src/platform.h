@@ -55,10 +55,10 @@ protected:
     Input _GetInputFromStr(std::string inputString)const;
 
 private:
-    virtual void _FakeKeyPress(int keycode, bool pressed)=0;
-    virtual void _FakeMouseMove(int x, int y)=0;
-    virtual void _FakeMouseButton(int button, bool pressed)=0;
-    virtual void _FakeMouseWheel(int wheel, bool pressed)=0;
+    virtual void _OSFakeKeyPress(int keycode, bool pressed)=0;
+    virtual void _OSFakeMouseMove(int x, int y)=0;
+    virtual void _OSFakeMouseButton(int button, bool pressed)=0;
+    virtual void _OSFakeMouseWheel(int direction, bool pressed)=0;
 
     std::map<std::string, Input> _inputMap;
     std::map<std::string, bool> _previousState;

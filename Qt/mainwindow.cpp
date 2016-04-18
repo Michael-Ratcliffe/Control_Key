@@ -1,9 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     debug = new QDebugStream(std::cout, ui->textEdit);
@@ -13,10 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowIcon(icon);
 
     if(!controlKey.Init(controllerDB.toStdString()))
-    {
         QMessageBox::critical(this, "Error", "Failed To Initialize ControlKey");
-        throw std::exception();
-    }
 
 //Get input string list from platform to use for combo boxes
     QStringList list;
@@ -71,13 +66,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(MainLoop()));
-    timer->start(0);
+    timer->start(8);
 }
 
 void MainWindow::MainLoop()
 {
-    //TODO: Better Loop
-
     static bool toggle = false;
     if(controlKey.controller.Quit() && !toggle)
     {
@@ -87,12 +80,21 @@ void MainWindow::MainLoop()
     if(!controlKey.controller.Quit() && toggle)
     {
         toggle = false;
-        controlKey.controller.sendEvents = !controlKey.controller.sendEvents;
         controlKey.platform.ClearEvents();
+
+        if(controlKey.controller.sendEvents)
+        {
+            controlKey.controller.sendEvents = false;
+            std::cout << "deactivated" << std::endl;
+        }
+        else
+        {
+            controlKey.controller.sendEvents = true;
+            std::cout << "activated" << std::endl;
+        }
     }
 
     controlKey.Update();
-    SDL_Delay(8);//Works a lot better than qtimer delay
 }
 
 void MainWindow::UpdateConfigList()

@@ -36,7 +36,7 @@ TARGET = ControlKey-GUI
 TEMPLATE = app
 FORMS += mainwindow.ui
 
-DESTDIR = ../control_key
+DESTDIR = ../app
 CONFIG += c++11
 
 unix {
@@ -44,6 +44,5 @@ LIBS += -lX11 -lXtst -lSDL2main -lSDL2
 }
 
 win32 {
-INCLUDEPATH += ../deps/include
-LIBS += -L ../deps/lib/x86 -lSDL2main -lSDL2
+LIBS += -lSDL2main -lSDL2
 }

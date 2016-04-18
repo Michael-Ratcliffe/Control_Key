@@ -41,7 +41,7 @@ bool Controller::OpenFirstAvailable()
 
 bool Controller::Open(int index)
 {
-    //Only open controller if its a game controller and its not already open
+    //Only open controller if its a game controller, and its not already open
     if(SDL_IsGameController(index) && _indexID != index)
     {
         Close();
@@ -50,7 +50,7 @@ bool Controller::Open(int index)
         {
             _indexID = index;
             std::cout << "Opened Controller <" << SDL_GameControllerName(_SDLController)
-            << "> With Index: " << _indexID << std::endl;
+            << "> At Index: " << _indexID << std::endl;
             return true;
         }
         else
@@ -61,17 +61,14 @@ bool Controller::Open(int index)
 
 bool Controller::IsOpen()const
 {
-    if(_SDLController)
-        return true;
-    else
-        return false;
+    return _SDLController != nullptr;
 }
 
 void Controller::Close()
 {
     if(IsOpen())
     {
-        std::cout << "Closing Controller <" << SDL_GameControllerName(_SDLController) << "> With Index: " << _indexID << std::endl;
+        std::cout << "Closing Controller <" << SDL_GameControllerName(_SDLController) << "> At Index: " << _indexID << std::endl;
         SDL_GameControllerClose(_SDLController);
         _SDLController = nullptr;
         _indexID = -1;

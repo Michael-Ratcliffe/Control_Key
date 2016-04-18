@@ -1,13 +1,11 @@
-#Console Version
-Build_Dir = control_key
+#Terminal(non-gui) Version
+Build_Dir = app
 App_Name = controlkey
 Src = $(wildcard src/*.cpp)
-Include_Dir = deps/include
-Lib_Dir = deps/lib/x64
 
 Linux_Flags = -std=c++11 -lX11 -lXtst -lSDL2main -lSDL2
 
-Windows_Flags = -static-libgcc -static-libstdc++ -Bstatic -lpthread -std=c++11 -lmingw32 -I$(Include_Dir) -L$(Lib_Dir) -lSDL2main -lSDL2
+Windows_Flags = -static-libgcc -static-libstdc++ -Bstatic -lpthread -std=c++11 -lmingw32 -lSDL2main -lSDL2
 
 linux:
 	g++ $(Src) -o $(Build_Dir)/$(App_Name) $(Linux_Flags)

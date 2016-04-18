@@ -4,10 +4,9 @@ USB controller to keyboard and mouse emulator
 #About
 Control_Key is a cross-platform application that is available in both console and GUI versions.
 This program will work with any controller that exist in the config/gamecontrollerdb.txt database file. I will periodically update it to match the one from this site: https://raw.githubusercontent.com/gabomdq/SDL_GameControllerDB/master/gamecontrollerdb.txt
-There is one controller that I added that is not on this site which is the “Cideko Air Keyboard Conqueror”. However, only for Windows and Linux (sorry I do not have a Mac).
+There is one controller that I added that is not on this site which is the “Cideko Air Keyboard Conqueror”.
 This program has been tested on Ubuntu 14.04, Ubuntu 15.10, Windows 8.1, and Windows 10.
 
-The "builds" directory contains the prebuilt application for Windows and Linux
 
 #Dependencies
 SDL2
@@ -27,14 +26,14 @@ Nicer looking GUI
 
 #Building
 
-Note: The built executable will be in the control_key folder. This is the application directory, and after compiling it can be placed anywhere on your computer.
+Note: The built executable will be in the app folder. This is the application directory, and after compiling, it can be placed anywhere on your computer.
 
-Console: In the root directory, run “make linux” or “make windows” in a terminal. There is also "make linux-windows" which will make the Windows executable from Linux.
-Then cd to the control_key directory and launch the program with the path of the config file as an argument. 
+Console: In the root directory, run “make linux” or “make windows” in a terminal.
+Then cd to the app directory and launch the program with the path of the config file as an argument. 
 Example, ./controlkey config/minecraft.conf
 Please note that using the console version requires you to make config files manually.
 
-GUI: In the Qt folder open the ControlKey-GUI.pro file with Qt Creator. Then compile using release mode. On Windows do not "build and run" just "build" and then run deploy.bat in the root directory. This will copy the required libs from the deps folder into the control_key folder
+GUI: In the Qt folder open the ControlKey-GUI.pro file with Qt Creator. Then compile using release mode. Make sure you have the dependencies installed on your system
 
 #Disclaimer: Read The Full GPL v3 License For More Information
 

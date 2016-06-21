@@ -1,10 +1,12 @@
 #(Control)ler to (key)board
-USB controller to keyboard and mouse emulator 
+Emulate a keyboard and mouse with a USB controller 
 
 #About
 Control_Key is a cross-platform application that is available in both console and GUI versions.
-This program will work with any controller that exist in the config/gamecontrollerdb.txt database file. I will periodically update it to match the one from this site: https://raw.githubusercontent.com/gabomdq/SDL_GameControllerDB/master/gamecontrollerdb.txt
+This program will work with any controller that exists in the config/gamecontrollerdb.txt database file. I will periodically update it to match the one from this site: https://raw.githubusercontent.com/gabomdq/SDL_GameControllerDB/master/gamecontrollerdb.txt
 There is one controller that I added that is not on this site which is the “Cideko Air Keyboard Conqueror”.
+The GUI is designed for the Xbox360 controller. However, many different controllers are supported.  
+
 This program has been tested on Ubuntu 14.04, Ubuntu 15.10, Windows 8.1, and Windows 10.
 
 
@@ -13,8 +15,6 @@ SDL2
 
 QT5
 
-libx11 (Linux)
-
 libxtst  (Linux)
 
 
@@ -22,7 +22,7 @@ libxtst  (Linux)
 
 Mac support
 
-Nicer looking GUI
+More intuitive GUI 
 
 #Building
 
